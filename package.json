@@ -101,18 +101,19 @@
         "jasmine-core": "2.8.0",
         "mocha": "4.0.1",
         "qunitjs": "2.4.1",
-        "typescript": "2.6.2"
+        "typescript": "2.6.2",
+        "vsce": "^1.58.0",
+        "vscode": "^1.1.30"
     },
     "dependencies": {
         "fs-extra": "4.0.3",
         "handlebars": "4.0.11",
         "linq-es2015": "2.4.29",
+        "mkdirp": "0.5.1",
         "ncp": "2.0.0",
         "node-rest-client": "3.1.0",
         "request": "2.83.0",
-        "vscode": "1.1.10",
-        "xml2js": "0.4.19",
-        "mkdirp": "0.5.1"
+        "xml2js": "0.4.19"
     },
     "author": {
         "email": "andreas@pazureck.de",
