@@ -181,7 +181,7 @@ export function getEntityTypeInterface(type: EntityType, schema: Schema): IEntit
                     Name: prop.$.Name,
                     Type: getType(prop.$.Type),
                     Nullable: prop.$.Nullable ? (prop.$.Nullable == "false" ? false : true) : true,
-                    KeyValeus: Object.keys(prop.$).map(key => {
+                    All: Object.keys(prop.$).map(key => {
                         return { Key: key, Value: prop.$[key] };
                     })
                 };

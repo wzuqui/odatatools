@@ -1,13 +1,13 @@
+import { IEntityType, ISimpleType } from './v200/outtypes';
+import { Log } from './log';
+import * as xml2js from 'xml2js';
+import * as request from 'request';
+import { window, workspace } from "vscode";
+import * as path from 'path';
+import { Global } from './extension';
 import * as fs from 'fs';
 import * as fse from 'fs-extra';
-import * as path from 'path';
-import * as request from 'request';
-import { window, workspace } from 'vscode';
-import * as xml2js from 'xml2js';
-
-import { Global } from './extension';
-import { Log } from './log';
-import { IEntityType, ISimpleType } from './v200/outtypes';
+import * as mkd from 'mkdirp';
 
 export type Modularity = "Ambient" | "Modular";
 
@@ -176,17 +176,11 @@ export function getEntityTypeInterface(type: EntityType, schema: Schema): IEntit
     };
     if (type.Property)
         for (let prop of type.Property)
-            {
-                const a = {
-                    Name: prop.$.Name,
-                    Type: getType(prop.$.Type),
-                    Nullable: prop.$.Nullable ? (prop.$.Nullable == "false" ? false : true) : true,
-                    KeyValeus: Object.keys(prop.$).map(key => {
-                        return { Key: key, Value: prop.$[key] };
-                    })
-                };
-                p.Properties.push(a);
-            }
+            p.Properties.push({
+                Name: prop.$.Name,
+                Type: getType(prop.$.Type),
+                Nullable: prop.$.Nullable ? (prop.$.Nullable == "false" ? false : true) : true,
+            });
     if (type.Key) {
         p.Key = p.Properties[0];
     }
