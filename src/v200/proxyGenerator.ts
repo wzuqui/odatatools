@@ -32,6 +32,10 @@ hb.registerHelper('SemHttpInfo', function(pNome: string) {
   return pNome.replace('Get', '').replace('Post', '').replace('Patch', '').replace('Patch', '').replace('Delete', '');
 });
 
+hb.registerHelper('RemoveSingleResult', function(pNome: string) {
+  return pNome.replace('SingleResult', '');
+});
+
 export async function generateProxy(
   metadata: Edmx,
   options: TemplateGeneratorSettings,
