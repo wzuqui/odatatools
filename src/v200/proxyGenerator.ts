@@ -29,11 +29,12 @@ hb.logger.log = (level, obj) => {
 };
 
 hb.registerHelper('SemHttpInfo', function(pNome: string) {
-  return pNome.replace('Get', '').replace('Post', '').replace('Patch', '').replace('Patch', '').replace('Delete', '');
-});
-
-hb.registerHelper('RemoveSingleResult', function(pNome: string) {
-  return pNome.replace('SingleResult', '');
+  return pNome.replace('Get', '')
+              .replace('Post', '')
+              .replace('Patch', '')
+              .replace('Patch', '')
+              .replace('Delete', '')
+              .replace('SingleResult', '');
 });
 
 export async function generateProxy(
