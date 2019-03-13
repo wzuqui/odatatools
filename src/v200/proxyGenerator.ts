@@ -1,54 +1,24 @@
-import * as hb from "handlebars";
+import * as hb from 'handlebars';
+import { commands, Range, window } from 'vscode';
+
+import { createHeader, GeneratorSettings, getEntityTypeInterface, getType, TemplateGeneratorSettings } from '../helper';
+import { Log } from '../log';
 import {
   IAction,
   IActionImport,
   IComplexType,
-  IEntityContainer,
   IEntitySet,
   IEntityType,
   IEnum,
-  IEnumType,
   IFunction,
   IFunctionImport,
   IMethod,
-  INavigationProperty,
   INavigationPropertyBinding,
   IODataEntities,
   IODataSchema,
   IParameter,
-  ISimpleType
-} from "./outtypes";
-import {
-  window,
-  TextEdit,
-  Range,
-  commands,
-  ExtensionContext,
-  workspace
-} from "vscode";
-import { Global } from "../extension";
-import { Log } from "../log";
-import * as enumerable from "linq-es2015";
-import { Enumerable } from "linq-es2015";
-import * as fs from "fs";
-import * as path from "path";
-import * as request from "request";
-import * as xml2js from "xml2js";
-import {} from "./outtypes";
-import {
-  createHeader,
-  GeneratorSettings,
-  getGeneratorSettingsFromDocumentText,
-  getHostAddressFromUser,
-  getMetadata,
-  getModifiedTemplates,
-  GetOutputStyleFromUser,
-  Modularity,
-  NoHeaderError,
-  TemplateGeneratorSettings,
-  getEntityTypeInterface,
-  getType
-} from "../helper";
+  ISimpleType,
+} from './outtypes';
 
 const methodhook = "//${unboundMethods}";
 const log = new Log("proxyGeneratorV200");
@@ -57,6 +27,10 @@ hb.logger.log = (level, obj) => {
   // TODO: Forward loglevel;
   log.Info("# " + obj);
 };
+
+hb.registerHelper('SemHttpActionOrFunction', function(pNome: string) {
+  return pNome.replace('Get', '').replace('Post', '').replace('Patch', '').replace('Patch', '').replace('Delete', '');
+});
 
 export async function generateProxy(
   metadata: Edmx,
