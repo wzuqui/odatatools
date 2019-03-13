@@ -28,7 +28,7 @@ hb.logger.log = (level, obj) => {
   log.Info("# " + obj);
 };
 
-hb.registerHelper('SemHttpActionOrFunction', function(pNome: string) {
+hb.registerHelper('SemHttpInfo', function(pNome: string) {
   return pNome.replace('Get', '').replace('Post', '').replace('Patch', '').replace('Patch', '').replace('Delete', '');
 });
 
